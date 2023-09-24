@@ -8,12 +8,11 @@ import (
 )
 
 func repl() {
-
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
 		fmt.Print("pokedex > ")
-
+		
 		scanned := scanner.Scan()
 		if !scanned {
 			break
@@ -21,9 +20,9 @@ func repl() {
 
 		line := strings.ToLower(scanner.Text())
 		if cmd, exists := commands[line]; exists {
-			err := cmd.callback()
+			err := cmd.callback(myConfig)
 			if err != nil {
-				fmt.Println("There was an erorr.", err)
+				fmt.Println("There was an error.", err)
 			}
 
 		} else {

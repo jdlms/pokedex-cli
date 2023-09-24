@@ -1,12 +1,13 @@
 package main
 
+var commands map[string]cliCommand
+
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
 }
 
-var commands map[string]cliCommand // This is your package-level declaration
 
 func initializeCommands() {
 	commands = map[string]cliCommand{
@@ -19,6 +20,11 @@ func initializeCommands() {
 			name:        "exit",
 			description: "Exit the Pokedex",
 			callback:    commandExit,
+		},
+		"map": {
+			name:        "map",
+			description: "Lists available locations",
+			callback:    commandMap,
 		},
 	}
 }
