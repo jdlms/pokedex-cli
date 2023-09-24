@@ -8,9 +8,9 @@ import (
 )
 
 type mapResponse struct {
-	Count    int         `json:"count"`
-	Next     string      `json:"next"`
-	Previous interface{} `json:"previous"`
+	Count    int     `json:"count"`
+	Next     string  `json:"next"`
+	Previous *string `json:"previous"`
 	Results  []struct {
 		Name string `json:"name"`
 		URL  string `json:"url"`
@@ -38,6 +38,14 @@ func commandMap(cfg *config) error {
 
 	for _, result := range body.Results {
 		fmt.Println(result.Name)
+	}
+
+	// assign config values for next map command
+	cfg.nextURL = body.Next
+	if body.Previous != nil {
+		cfg.previousURL = *body.Previous
+	} else {
+		cfg.previousURL = ""
 	}
 
 	return nil

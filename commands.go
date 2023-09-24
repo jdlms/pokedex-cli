@@ -8,7 +8,6 @@ type cliCommand struct {
 	callback    func(*config) error
 }
 
-
 func initializeCommands() {
 	commands = map[string]cliCommand{
 		"help": {
