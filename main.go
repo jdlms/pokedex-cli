@@ -12,26 +12,42 @@ type cliCommand struct {
 	callback    func() error
 }
 
-var commands = map[string]cliCommand{
-	"help": {
-		name:        "help",
-		description: "Displays a help message",
-		callback:    commandHelp,
-	},
-	"exit": {
-		name:        "exit",
-		description: "Exit the Pokedex",
-		callback:    commandExit,
-	},
+var commands map[string]cliCommand // This is your package-level declaration
+
+func init() {
+	commands = map[string]cliCommand{
+		"help": {
+			name:        "help",
+			description: "Displays a help message",
+			callback:    commandHelp,
+		},
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
+		},
+	}
 }
 
 func commandHelp() error {
+	fmt.Println("**********")
 	fmt.Println("You asked for help!")
+	fmt.Println("")
+	fmt.Println("Here are a list of commands:")
+	fmt.Println("")
+	for _, cmd := range commands {
+		fmt.Print(cmd.name, ": ", cmd.description)
+		fmt.Println("")
+	}
+	fmt.Println("**********")
+
 	return nil
 }
 
 func commandExit() error {
+	fmt.Println("**********")
 	fmt.Println("Goodbye! You've exiting the Pokedex.")
+	fmt.Println("**********")
 	os.Exit(0)
 	return nil
 }
