@@ -12,18 +12,29 @@ type cliCommand struct {
 	callback    func() error
 }
 
-// return map[string]cliCommand{
-//     "help": {
-//         name:        "help",
-//         description: "Displays a help message",
-//         callback:    commandHelp,
-//     },
-//     "exit": {
-//         name:        "exit",
-//         description: "Exit the Pokedex",
-//         callback:    commandExit,
-//     },
-// }
+var commands = map[string]cliCommand{
+	"help": {
+		name:        "help",
+		description: "Displays a help message",
+		callback:    commandHelp,
+	},
+	"exit": {
+		name:        "exit",
+		description: "Exit the Pokedex",
+		callback:    commandExit,
+	},
+}
+
+func commandHelp() error {
+	fmt.Println("You asked for help!")
+	return nil
+}
+
+func commandExit() error {
+	fmt.Println("Goodbye! You've exiting the Pokedex.")
+	os.Exit(0)
+	return nil
+}
 
 func main() {
 
@@ -38,11 +49,15 @@ func main() {
 		}
 
 		line := scanner.Text()
-		if line == "quit" || line == "stop" {
-			fmt.Println("bye!")
-			break
-		}
+		if cmd, exists := commands[line]; exists {
+			err := cmd.callback()
+			if err != nil {
+				fmt.Println("There was an erorr.", err)
+			}
 
+		} else {
+			fmt.Println("Unknown command. Try again.")
+		}
 	}
 
 }
