@@ -44,8 +44,6 @@ func commandMap(cfg *config) error {
 	cfg.nextURL = body.Next
 	if body.Previous != nil {
 		cfg.previousURL = *body.Previous
-	} else {
-		cfg.previousURL = ""
 	}
 
 	return nil

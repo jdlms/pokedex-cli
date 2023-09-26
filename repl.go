@@ -12,7 +12,7 @@ func repl() {
 
 	for {
 		fmt.Print("pokedex > ")
-		
+
 		scanned := scanner.Scan()
 		if !scanned {
 			break
@@ -26,7 +26,7 @@ func repl() {
 			}
 
 		} else {
-			fmt.Println("Unknown command. Try again.")
+			fmt.Println("Unknown command. Try again, or ask for help.")
 		}
 	}
 

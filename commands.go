@@ -25,5 +25,10 @@ func initializeCommands() {
 			description: "Lists available locations",
 			callback:    commandMap,
 		},
+		"go back": {
+			name:        "go back",
+			description: "Lists previous locations",
+			callback:    commandBack,
+		},
 	}
 }

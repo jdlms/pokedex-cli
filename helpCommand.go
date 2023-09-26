@@ -12,7 +12,9 @@ func commandHelp(*config) error {
 		fmt.Print(cmd.name, ": ", cmd.description)
 		fmt.Println("")
 	}
+	fmt.Println("")
 	fmt.Println("**********")
+	fmt.Println("")
 
 	return nil
 }
